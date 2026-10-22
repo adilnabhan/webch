@@ -47,7 +47,17 @@ export const HomePage: React.FC = () => {
       ]);
 
       if (challengesData.status === 'fulfilled') {
-        setFeaturedChallenges(challengesData.value);
+        let chList = challengesData.value;
+        if (!chList || chList.length === 0) {
+          // If no active/upcoming challenges on /home/, fallback to latest catalog challenges
+          try {
+            const catalogRes = await ChallengeService.getChallenges({ page_size: 6 });
+            chList = catalogRes.results || [];
+          } catch {
+            chList = [];
+          }
+        }
+        setFeaturedChallenges(chList);
       }
       if (partnersData.status === 'fulfilled') {
         setPartners(partnersData.value);
