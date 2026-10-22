@@ -11,6 +11,14 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.local
+
+# Helper scripts with credentials
+push.bat
+push.ps1
+*.bat
+*.ps1
 
 # Editor directories and files
 .vscode/*
